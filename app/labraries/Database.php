@@ -66,3 +66,4 @@ class Database{
      return $this->statment->rowCount();
    }
 }
+?>

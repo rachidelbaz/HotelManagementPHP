@@ -8,13 +8,7 @@ class Pages extends Controller{
 
     public function Index(){
         //require_once("../app/views/pages/index.php");
-        //$users=$this->userModel->getUsers();
-        //$this->View('pages/index',$data);
+        $this->View('index');
     }
-
-    public function About(){
-     echo 'about pages';
-    }
-    
 }
 ?>

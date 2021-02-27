@@ -9,11 +9,14 @@ define('DB_PORT',3306);
 
 //APPROOT
 define("APPROOT",dirname(__DIR__));
-
+//FILEROOT
+define("FILEROOT",dirname(dirname(__DIR__)));
 //URL
 define('URLROOT',"http://".$_SERVER["HTTP_HOST"].'/MVCPHP');
 //print_r($_SERVER);
+define('SITENAME',"MVCPHP");
 
+?>
 
 
 

@@ -59,7 +59,7 @@ public function CreateUserSession($User){
     $_SESSION["USER_Email"]=$User->Email;
     header("Location:".URLROOT."/Pages/Index");
 }
-public function LogOut($loggedInUser){
+public function LogOut(){
      unset($_SESSION["USER_CIN"]);
      unset($_SESSION["USER_Email"]);
      header("Location:".URLROOT."/Users/Login");
@@ -139,7 +139,7 @@ public function Register(){
         $data['Password']=password_hash($data['Password'],PASSWORD_DEFAULT);
         //register 
         if($this->userModel->register($data)){
-         header('Location:'.URLROOT.'/user/Login.php');
+         header('Location:'.URLROOT.'/User/Login.php');
            }else{
             die("somthing went wrong"); }
         }    
@@ -149,3 +149,4 @@ public function Register(){
     $this->View('user/Register',$data);
 }
 }
+?>

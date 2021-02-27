@@ -2,7 +2,7 @@
 class Core{
     protected $currentController="Pages";
     protected $currentMethod="Index";
-    protected $currentParam=[];
+    protected $Params=[];
     
     public function __construct(){
         $url=$this->getUrl();
@@ -23,9 +23,10 @@ class Core{
                      unset($url[1]);
                    }
                 }
-                $this->currentParam=$url? array_values($url):[];
-                
-                call_user_func_array([$this->currentController,$this->currentMethod],$this->currentParam);
+                $this->Params=$url? array_values($url):[];
+                //var_dump( $this->Params);
+                //$this->Params=$url? $url:'';
+                call_user_func_array([$this->currentController,$this->currentMethod],$this->Params);
         
         
         }
@@ -43,3 +44,4 @@ class Core{
    
     
 }
+?>

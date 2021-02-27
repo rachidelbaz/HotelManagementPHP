@@ -1,7 +1,7 @@
 	<!-- Footer -->
 
 	<footer class="footer">
-		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="<?php echo URLROOT;?>/public/images/footer.jpg" data-speed="0.8"></div>
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="<?php echo URLROOT?>/public/images/footer.jpg" data-speed="0.8"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
@@ -45,21 +45,19 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</footer>
 </div>
 
-<script src="<?php echo URLROOT;?>/public/js/jquery-3.3.1.min.js"></script>
-<!--<script src="styles/bootstrap-4.1.2/popper.js"></script>
-<script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
-<script src="plugins/greensock/TweenMax.min.js"></script>
-<script src="plugins/greensock/TimelineMax.min.js"></script>
-<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="plugins/greensock/animation.gsap.min.js"></script>
-<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="plugins/OwlCarousel2-2.3.4/owl.carousel.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="plugins/progressbar/progressbar.min.js"></script>
-<script src="plugins/parallax-js-master/parallax.min.js"></script>
-<script src="plugins/jquery-datepicker/jquery-ui.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
--->
-<script src="<?php echo URLROOT;?>/public/js/contact.js"></script>
+<script src="<?php echo FILEROOT?>/public/js/jquery-3.3.1.min.js"></script>
+<!--<script src="<?php echo FILEROOT?>/public/styles/bootstrap-4.1.2/popper.js"></script>
+<script src="<?php echo FILEROOT?>/public/styles/bootstrap-4.1.2/bootstrap.min.js"></script>-->
+<script src="<?php echo FILEROOT?>/public/plugins/greensock/TweenMax.min.js"></script>
+<script src="<?php echo FILEROOT?>/public/plugins/greensock/TimelineMax.min.js"></script>
+<script src="<?php echo FILEROOT?>/public/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="<?php echo FILEROOT?>/public/plugins/greensock/animation.gsap.min.js"></script>
+<script src="<?php echo FILEROOT?>/public/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="<?php echo FILEROOT?>/public/plugins/OwlCarousel2-2.3.4/owl.carousel.js"></script>
+<script src="<?php echo FILEROOT?>/public/plugins/easing/easing.js"></script>
+<!--<script src="<?php echo FILEROOT?>/public/plugins/progressbar/progressbar.min.js"></script>-->
+<script src="<?php echo FIlEROOT?>/public/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="<?php echo FILEROOT?>/public/plugins/jquery-datepicker/jquery-ui.js"></script>
+<script src="<?php echo FILEROOT?>/public/js/contact.js"></script>
 </body>
 </html>

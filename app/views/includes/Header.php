@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Contact</title>
+<title>HOTEL</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Marimar Hotel template project">
+<meta name="description" content="Hotel template project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="<?php echo URLROOT;?>/public/styles/bootstrap-4.1.2/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<?php echo URLROOT?>/public/styles/bootstrap-4.1.2/bootstrap.min.css">
 <link href="<?php echo URLROOT;?>/public/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css">
-<link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="<?php echo URLROOT;?>/public/styles/contact.css">
+<link rel="stylesheet" type="text/css" href="<?php echo URLROOT?>/public/plugins/OwlCarousel2-2.3.4/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="<?php echo URLROOT?>/public/plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="<?php echo URLROOT?>/public/plugins/OwlCarousel2-2.3.4/animate.css">
+<link href="<?php echo URLROOT?>/public/plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="<?php echo URLROOT?>/public/styles/contact.css">
 <!--<link rel="stylesheet" type="text/css" href="<?php echo URLROOT;?>/public/styles/contact_responsive.css">-->
 </head>
 <body>
@@ -35,6 +35,11 @@
 					<li><a href="rooms.html">Rooms</a></li>
 					<li><a href="blog.html">News</a></li>
 					<li class="active"><a href="contact.html">Contact</a></li>
+					<?php if(isLogedIn()): ?>
+					<li><a href="<?php echo URLROOT?>/Users/LogOut">LogOut</a></li>
+					<?php else:?>
+					<li><a href="<?php echo URLROOT?>/Users/Login">Login</a><li>
+					<?php endif?>
 				</ul>
 			</nav>
 
@@ -115,6 +120,7 @@
 					<li><a href="rooms.html">Rooms</a></li>
 					<li><a href="blog.html">News</a></li>
 					<li><a href="contact.html">Contact</a></li>
+					
 				</ul>
 			</nav>
 			<div class="button menu_button"><a href="#">book now</a></div>
@@ -136,7 +142,7 @@
 	<!-- Home -->
 
 	<div class="home">
-		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/contact.jpg" data-speed="0.8"></div>
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="<?php echo URLROOT?>/public/images/contact.jpg" data-speed="0.8"></div>
 		<div class="home_container d-flex flex-column align-items-center justify-content-center">
 			<div class="home_title"><h1>Contact</h1></div>
 		</div>
