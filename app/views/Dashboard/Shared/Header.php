@@ -28,6 +28,7 @@
     <link rel="stylesheet"
           href="//code.jquery.com/ui/1.11.4/themes/ui-darkness/jquery-ui.css" />
 -->
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 </head>
 
 <body>

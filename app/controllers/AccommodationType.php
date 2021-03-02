@@ -75,6 +75,15 @@ class AccommodationType extends Controller{
         
          $this->View("Dashboard/AccommodationType/Edit",$data);
        }
-
+         
+       public function Delete($id){
+         if($_SERVER["REQUEST_METHOD"]=="POST"){
+          if($this->accoTypeModel->delete($id)){
+            header("Location:".URLROOT."/AccommodationType");
+          }else{
+            die();
+          }
+         }
+       }
 }
 ?>
