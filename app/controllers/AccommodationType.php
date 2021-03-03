@@ -16,7 +16,7 @@ class AccommodationType extends Controller{
            $this->View("Dashboard/AccommodationType/AccommodationType",$data);
        }
 
-       public function add(){
+       public function Create(){
          
            if($_SERVER['REQUEST_METHOD']=='POST'){
            $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);

@@ -5,7 +5,7 @@ class Accommodation_Type {
         $this->db=new Database;
     }
 
-     private function Add($data){
+     public function Add($data){
         $this->db->query('INSERT INTO ACCOMMODATIONTYPE(NAME,DESCRIPTION) VALUES(:NAME,:DESCRIPTION)');
 
         $this->db->Bind(":NAME",$data['Name']);
