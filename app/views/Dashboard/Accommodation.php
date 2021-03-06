@@ -1,5 +1,7 @@
-<?php require_once(APPROOT."/views/Dashboard/Shared/Header.php");?>
+<?php require_once(APPROOT . "/views/Dashboard/Shared/Header.php"); ?>
 
-<h1 class="mt-4">Dash board</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="mt-4 text-secondary">DASHBOARD</h1>
+</div>
 
-<?php require_once(APPROOT."/views/Dashboard/Shared/Footer.php");?>
+<?php require_once(APPROOT . "/views/Dashboard/Shared/Footer.php"); ?>

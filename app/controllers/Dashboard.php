@@ -1,8 +1,13 @@
 <?php
-class Dashboard extends Controller {
+class Dashboard extends Controller
+{
 
-    public function Index(){
-    $this->View("Dashboard/Accommodation");
+    public function __construct()
+    {
+    }
+
+    public function Index()
+    {
+        $this->View("Dashboard/Accommodation");
     }
 }
-?>

@@ -11,9 +11,9 @@
     <title>HOTEL-Management</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous" />
     <!-- Custom styles for this template -->
-    <link href="<?php echo URLROOT?>/public/dashboard/Content/css/simple-sidebar.css" rel="stylesheet" />
+    <link href="<?php echo URLROOT ?>/public/dashboard/Content/css/simple-sidebar.css" rel="stylesheet" />
     <!--<script src="~/Scripts/kit.fontawesome.js"></script>-->
 
     <!--Font awesome-->
@@ -28,48 +28,47 @@
     <link rel="stylesheet"
           href="//code.jquery.com/ui/1.11.4/themes/ui-darkness/jquery-ui.css" />
 -->
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-    <div class="d-flex " id="wrapper">
+    <div class="d-flex toggled" id="wrapper">
 
         <!-- Sidebar -->
         <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading h-25"><i class="fas fa-hotel fa-4x"></i> RM</div>
+            <div class="sidebar-heading h-25"><i class="fas fa-hotel fa-4x"></i> HM</div>
             <div class="list-group list-group-flush">
-                <a href="<?php echo URLROOT?>/AccommodationType" class="list-group-item list-group-item-action bg-light"><i class="fas fa-building fa-2x"></i> Accommodation Type</a>
-                <a href="../AccommodationGadget/" class="list-group-item list-group-item-action bg-light"><i class="fas fa-archive fa-2x"></i> Accommodation Gadgets</a>
-                <a href="" class="list-group-item list-group-item-action bg-light"><i class="fas fa-bed fa-2x"></i> Accommodations</a>
-                <a href="" class="list-group-item list-group-item-action bg-light"><i class="fas fa-users-cog fa-2x"></i> Roles</a>
-                <a href="" class="list-group-item list-group-item-action bg-light"><i class="fas fa-users fa-2x"></i> Users</a>
-                <a href="" class="list-group-item list-group-item-action bg-light"><i class="fas fa-concierge-bell fa-2x"></i> Bookings</a>
-                
+                <a href="<?php echo URLROOT ?>/AccommodationType" class="list-group-item list-group-item-action bg-light"><i class="fas fa-building fa-2x"></i> Accommodation Type</a>
+                <a href="<?php echo URLROOT ?>/AccommodationPackage/" class="list-group-item list-group-item-action bg-light"><i class="fas fa-archive fa-2x"></i> Accommodation Package</a>
+                <a href="" class="list-group-item list-group-item-action bg-light"><i class="fas fa-bed fa-2x"></i> Accommodation</a>
+                <a href="" class="list-group-item list-group-item-action bg-light"><i class="fas fa-users-cog fa-2x"></i> Role</a>
+                <a href="" class="list-group-item list-group-item-action bg-light"><i class="fas fa-users fa-2x"></i> User</a>
+                <a href="" class="list-group-item list-group-item-action bg-light"><i class="fas fa-concierge-bell fa-2x"></i> Booking</a>
+
 
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
         <div id="page-content-wrapper">
-
-            <nav class="nav navbar navbar-expand-lg navbar-light bg-light border-bottom" id="">
-            <div class="btn_Tagolle " id="menu-toggle">
+            <nav class="nav navbar navbar-expand-lg navbar-light bg-light border-bottom justify-content-between">
+                <div class="btn_Tagolle change" id="menu-toggle">
                     <div class="bar bar1"></div>
                     <div class="bar bar2"></div>
                     <div class="bar bar3"></div>
-                </div>                
+                </div>
+
                 <div class="nav navbar-nav ml-auto mt-2 mt-lg-0">
-                  <!--  @if (Request.IsAuthenticated)
-                    {
-                        using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "d-flex align-items-center" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: new { area="" }, htmlAttributes: new { title = "Manage", @class="text-secondary" })-->
-                    <a class="navbar-brand d-flex flex-column ml-5"  href="javascript:document.getElementById('logoutForm').submit()"><i class="fas fa-sign-out-alt fa-1x ml-1"></i>Logout</a>
+                    <?php if (isLogedIn()) : ?>
+                        <div class="m-auto">
+                            <h1><?php echo ($_SESSION['USER_FullName']) ?></h1>
+                        </div>
+                        <li><a class="navbar-brand d-flex flex-column ml-5" href="<?php echo URLROOT ?>/Users/LogOut"><i class="fas fa-sign-out-alt fa-1x ml-1"></i>LogOut</a></li>
+                    <?php else : ?>
+                        <?php header('location:' . URLROOT . '/Users/Login'); ?>
+                    <?php endif ?>
 
                 </div>
 
             </nav>
-
-           

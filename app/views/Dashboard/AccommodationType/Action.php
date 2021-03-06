@@ -1,6 +1,6 @@
     <div class="modal-header">
         <h5 class="modal-title" id="ModalTitle">
-            <span hidden>Edit Accommodation Type</span>
+            <span>Edit Accommodation Type</span>
             <span>Create Accommodation Type</span>
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -22,7 +22,7 @@
                 </div>
                 <textarea class="form-control" name="Description" rows="5" cols="10"></textarea>
             </div>
-            <span class="text-danger"><?php echo $data['NameError'] ?></span>
+            <span class="text-danger"><?php echo $data['Errors'] ?></span>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-share fa-1x mr-1"></i>Close</button>

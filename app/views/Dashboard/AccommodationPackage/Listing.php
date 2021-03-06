@@ -1,27 +1,42 @@
     <!--Table-->
     <!--check if acco types is null or empty-->
-    <?php if (!empty($data['AccoTypes'])) : ?>
+    <?php if (!empty($data['AccoPackages'])) : ?>
         <table class="table table-dark table-striped" id="ListingTable">
             <thead>
                 <tr>
+                    <th scope="col">Accommodation Type</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Description</th>
+                    <th scope="col">Number of rooms</th>
+                    <th scope="col">Fee per night ($)</th>
                     <th scope="col" style="width: 15%;">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($data['AccoTypes'] as $value) : ?>
+                <?php foreach ($data['AccoPackages'] as $value) : ?>
                     <tr>
+                        <!--get acco type name-->
+                        <!-- <?php if (!empty($data['accoTypes'])) : ?>
+                            <?php foreach ($data['accoTypes'] as $v) : ?>
+                                <?php if ($value->ACCOMMODATIONTYPE_ID == $v->ID) : ?>
+                                    <td><?php echo $v->NAME ?></td>
+                                <?php endif ?>
+                            <?php endforeach ?>
+                        <?php endif ?>
+                        <!--end-->
+
+                        <td><?php echo $value->ACCOMMODATIONTYPE_ID ?></td>
                         <td scope="row"><?php echo $value->NAME ?></td>
-                        <td><?php echo $value->DESCRIPTION ?></td>
+                        <td><?php echo $value->NOFROOM ?></td>
+                        <td><?php echo $value->FEEPERNIGHT ?></td>
+
                         <!--btn Edit-->
                         <td>
                             <!--<a href="<?php echo URLROOT ?>/AccommodationType/Edit/<?php echo $value->ID ?>" class="btn btn-outline-primary mr-2">
                                 <i class="fas fa-edit fa-1x mr-1"></i>Edit</a>-->
-                            <button onclick="bindHref(this,document.getElementById('formAction'))" class="btn btn-outline-primary mr-2" data-toggle="modal" data-target="#exampleModalCenter" data-href="<?php echo URLROOT ?>/AccommodationType/Edit/<?php echo $value->ID ?>">
+                            <button onclick="bindHref(this,document.getElementById('formAction'))" class="btn btn-outline-primary mr-2" data-toggle="modal" data-target="#exampleModalCenter" data-href="<?php echo URLROOT . "/{$data['controller']}" ?>/Edit/<?php echo $value->ID ?>">
                                 <i class="fas fa-edit fa-1x mr-1"></i>Edit</button>
                             <!--btn Delete-->
-                            <button onclick="bindHref(this,document.getElementById('formDelete'))" data-href="<?php echo URLROOT ?>/AccommodationType/Delete/<?php echo $value->ID ?>" data-toggle="modal" data-target=".bd-example-modal-sm" class="btn btn-outline-danger">
+                            <button onclick="bindHref(this,document.getElementById('formDelete'))" data-href="<?php echo URLROOT . "/{$data['controller']}" ?>/Delete/<?php echo $value->ID ?>" data-toggle="modal" data-target=".bd-example-modal-sm" class="btn btn-outline-danger">
                                 <i class="fas fa-trash-alt fa-1x mr-1"></i>Delete</button>
                     </tr>
                 <?php endforeach ?>

@@ -1,7 +1,7 @@
 <?php require_once(APPROOT . "/views/Dashboard/Shared/Header.php"); ?>
 <!-- div search -->
 <div class="row">
-    <h1 class="mx-auto mb-1"> Accommodation Type</h1>
+    <h1 class="mx-auto mb-1"> Accommodation Package</h1>
 </div>
 <hr />
 <div class="row">
@@ -22,9 +22,9 @@
             </form>
             <div class="input-group-append" id="button-addon4">
                 <a class="btn btn-outline-primary" type="button" href="javascript:document.getElementById('searchForm').submit()"><i class="fas fa-search fa-1x mr-1"></i>Search</a>
-                <a href="<?php echo URLROOT ?>/AccommodationType/" class="btn btn-outline-secondary"><i class="fas fa-redo fa-1x mr-1"></i>Reset</a>
+                <a href="<?php echo URLROOT ?>/AccommodationPackage/" class="btn btn-outline-secondary"><i class="fas fa-redo fa-1x mr-1"></i>Reset</a>
                 <!-- Button trigger modal -->
-                <button onclick="bindHref(this,document.getElementById('formAction'))" class="btn btn-outline-success btnAction" type="button" data-href="<?php echo URLROOT ?>/AccommodationType/Create" data-target="#exampleModalCenter" data-toggle="modal"><i class="fas fa-plus fa-1x mr-1"></i>Create</button>
+                <button onclick="bindHref(this,document.getElementById('formAction'))" class="btn btn-outline-success btnAction" type="button" data-href="<?php echo URLROOT . "/{$data['controller']}" ?>/Create" data-target="#exampleModalCenter" data-toggle="modal"><i class="fas fa-plus fa-1x mr-1"></i>Create</button>
             </div>
         </div>
 
