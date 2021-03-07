@@ -40,8 +40,8 @@
             <div class="sidebar-heading h-25"><i class="fas fa-hotel fa-4x"></i> HM</div>
             <div class="list-group list-group-flush">
                 <a href="<?php echo URLROOT ?>/AccommodationType" class="list-group-item list-group-item-action bg-light"><i class="fas fa-building fa-2x"></i> Accommodation Type</a>
-                <a href="<?php echo URLROOT ?>/AccommodationPackage/" class="list-group-item list-group-item-action bg-light"><i class="fas fa-archive fa-2x"></i> Accommodation Package</a>
-                <a href="" class="list-group-item list-group-item-action bg-light"><i class="fas fa-bed fa-2x"></i> Accommodation</a>
+                <a href="<?php echo URLROOT ?>/AccommodationPackage" class="list-group-item list-group-item-action bg-light"><i class="fas fa-archive fa-2x"></i> Accommodation Package</a>
+                <a href="<?php echo URLROOT ?>/Accommodation" class="list-group-item list-group-item-action bg-light"><i class="fas fa-bed fa-2x"></i> Accommodation</a>
                 <a href="" class="list-group-item list-group-item-action bg-light"><i class="fas fa-users-cog fa-2x"></i> Role</a>
                 <a href="" class="list-group-item list-group-item-action bg-light"><i class="fas fa-users fa-2x"></i> User</a>
                 <a href="" class="list-group-item list-group-item-action bg-light"><i class="fas fa-concierge-bell fa-2x"></i> Booking</a>

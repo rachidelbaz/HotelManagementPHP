@@ -1,6 +1,7 @@
 function getHref(e){
     return e.getAttribute("data-href");
   }
+  //e=>button/el=>form
   function bindHref(e,el){
       if(el.hasAttribute("action")){
         el.removeAttribute("action");
@@ -18,11 +19,11 @@ function getHref(e){
         //get current row
           let tr=e.parentElement.parentElement;
           let tdData=[];
-          for(let i=0;i<tr.children.length-1;i++){
+          for(let i=0;i<tr.children.length-2;i++){
              tdData.push(tr.children[i].textContent);
           }
           //send data to the form 
-          for(let i=0;i<tr.children.length-1;i++){
+          for(let i=0;i<tr.children.length-2;i++){
             el.children[i].lastElementChild.value=tdData[i];
           }
       }

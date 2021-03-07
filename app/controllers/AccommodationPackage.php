@@ -61,7 +61,8 @@ class AccommodationPackage extends Controller
                 }
                 if (empty($data['Errors'])) {
                     if ($this->accoPackageModel->Add($data)) {
-                        $this->View("Dashboard/AccommodationPackage/AccommodationPackage", $data);
+                        header("Location:" . URLROOT . "/AccommodationPackage");
+                        //$this->View("Dashboard/AccommodationPackage/AccommodationPackage", $data);
                     } else {
                         //die("something went wrong");
                         $data["Errors"] = "somthing went wrong ,Please try one more time";
@@ -108,7 +109,8 @@ class AccommodationPackage extends Controller
             if (empty($data['Errors'])) {
                 if ($this->accoPackageModel->update($data)) {
                     $data['Message'] = "Updated successfully";
-                    $this->View("Dashboard/AccommodationPackage/AccommodationPackage", $data);
+                    header("Location:" . URLROOT . "/AccommodationPackage");
+                    // $this->View("Dashboard/AccommodationPackage/AccommodationPackage", $data);
                 }
             }
         }

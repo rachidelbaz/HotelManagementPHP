@@ -4,18 +4,23 @@
         <table class="table table-dark table-striped" id="ListingTable">
             <thead>
                 <tr>
-                    <th scope="col">Accommodation Type</th>
                     <th scope="col">Name</th>
                     <th scope="col">Number of rooms</th>
                     <th scope="col">Fee per night ($)</th>
+                    <th scope="col">Accommodation Type</th>
                     <th scope="col" style="width: 15%;">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($data['AccoPackages'] as $value) : ?>
                     <tr>
+
+                        <td hidden><?php echo $value->ACCOMMODATIONTYPE_ID ?></td>
+                        <td scope="row"><?php echo $value->NAME ?></td>
+                        <td><?php echo $value->NOFROOM ?></td>
+                        <td><?php echo $value->FEEPERNIGHT ?></td>
                         <!--get acco type name-->
-                        <!-- <?php if (!empty($data['accoTypes'])) : ?>
+                        <?php if (!empty($data['accoTypes'])) : ?>
                             <?php foreach ($data['accoTypes'] as $v) : ?>
                                 <?php if ($value->ACCOMMODATIONTYPE_ID == $v->ID) : ?>
                                     <td><?php echo $v->NAME ?></td>
@@ -23,12 +28,6 @@
                             <?php endforeach ?>
                         <?php endif ?>
                         <!--end-->
-
-                        <td><?php echo $value->ACCOMMODATIONTYPE_ID ?></td>
-                        <td scope="row"><?php echo $value->NAME ?></td>
-                        <td><?php echo $value->NOFROOM ?></td>
-                        <td><?php echo $value->FEEPERNIGHT ?></td>
-
                         <!--btn Edit-->
                         <td>
                             <!--<a href="<?php echo URLROOT ?>/AccommodationType/Edit/<?php echo $value->ID ?>" class="btn btn-outline-primary mr-2">
