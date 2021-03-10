@@ -1,4 +1,5 @@
-function getHref(e){
+
+  function getHref(e){
     return e.getAttribute("data-href");
   }
   //e=>button/el=>form
@@ -39,4 +40,7 @@ function getHref(e){
      ModalTitle.children[0].removeAttribute("hidden");
    }
   }
-  
+//============================getdata for booking===============================================
+
+
+//=============================================================================================

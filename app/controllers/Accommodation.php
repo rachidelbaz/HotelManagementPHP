@@ -64,4 +64,52 @@ class Accommodation extends Controller
         }
         $this->View("Dashboard/Accommodation/Accommodation", $data);
     }
+    public function Edit($id)
+    {
+        $accommo = $this->accoModel->getAccommoByID($id);
+        $data = [
+            'AccommoType' => $accommo->ACCOMMODATIONPACKAGE_ID,
+            'Name' => $accommo->NAME,
+            'Errors' => '',
+        ];
+        if ($_SERVER["REQUEST_METHOD"] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'ID' => $accommo->ID,
+                'Accommo' => trim($_POST['Accommo']),
+                'Name' => trim($_POST['Name']),
+                'Errors' => '',
+            ];
+            if (empty($data['Accommo'])) {
+                $data['Errors'] = "Accommodation should be selected,it's required";
+            }
+            if (empty($data['Name'])) {
+                $data['Errors'] = "Name couldn't be empty,it's required";
+            }
+
+            if (empty($data['Errors'])) {
+                if ($this->accoModel->update($data)) {
+                    $data['Message'] = "Updated successfully";
+                    header("Location:" . URLROOT . "/Accommodation");
+                    // $this->View("Dashboard/AccommodationPackage/AccommodationPackage", $data);
+                }
+            }
+        }
+
+        $this->View("Dashboard/Accommodation/Accommodation", $data);
+    }
+    public function Delete($id)
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if ($this->accoModel->delete($id)) {
+                header("Location:" . URLROOT . "/Accommodation");
+            } else {
+                die();
+            }
+        }
+    }
+    public function getAccommodationsByPackageId($id)
+    {
+        print_r(json_encode($this->accoModel->getAccommodationsByPackage($id)));
+    }
 }

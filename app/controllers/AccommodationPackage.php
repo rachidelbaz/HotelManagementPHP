@@ -127,4 +127,9 @@ class AccommodationPackage extends Controller
             }
         }
     }
+
+    public function getPackagesBytypeId($id)
+    {
+        print_r(json_encode($this->accoPackageModel->getPackagesByType($id)));
+    }
 }

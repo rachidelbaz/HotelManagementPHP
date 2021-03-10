@@ -95,4 +95,16 @@ class Accommodation_Package
             throw new PDOException($ex->getMessage(), $ex->getCode());
         }
     }
+
+    public function getPackagesByType($id)
+    {
+        try {
+            $this->db->query("SELECT ID,NAME FROM ACCOMMODATIONPACKAGE WHERE ACCOMMODATIONTYPE_ID=:ID");
+            $this->db->Bind(":ID", $id);
+            $result = $this->db->ResultSet();
+            return $result;
+        } catch (PDOException $ex) {
+            throw new PDOException($ex->getMessage(), $ex->getCode());
+        }
+    }
 }

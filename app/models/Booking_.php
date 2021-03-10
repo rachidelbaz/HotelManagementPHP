@@ -1,17 +1,21 @@
 <?php
-class Accommodation_
+class Booking_
 {
     private $db;
+    private $status;
     public function __construct()
     {
         $this->db = new Database;
+        $this->status = new enum;
     }
-
     public function Add($data)
     {
-        $this->db->query('INSERT INTO ACCOMMODATION(ACCOMMODATIONPACKAGE_ID,NAME) VALUES(:ACCOMMODATIONPACKAGE_ID,:NAME)');
-        $this->db->Bind(":ACCOMMODATIONPACKAGE_ID", $data['AccommoPackage']);
-        $this->db->Bind(":NAME", $data['Name']);
+        $this->db->query('INSERT INTO BOOKING(ACCOMMODATION_ID,FROMDATE,DURATION,STATUS,CLIENT_ID) VALUES(:ACCOMMODATION_ID,:FROMDATE,:DURATION,:STATUS,:CLIENT_ID)');
+        $this->db->Bind(":ACCOMMODATION_ID", $data['Accommodation']);
+        $this->db->Bind(":FROMDATE", $data['Date']);
+        $this->db->Bind(":DURATION", $data['Duration']);
+        $this->db->Bind(":CLIENT_ID", $data['CIN']);
+        $this->db->Bind(":STATUS", $this->status->PENDING); //add a booking with deafult value 1 : pending
 
         if ($this->db->Excute()) {
             return true;
@@ -19,13 +23,13 @@ class Accommodation_
             return false;
         }
     }
-    //listing Accommodation 
-    public function getAllAccomo()
+    //listing Booking
+    public function getAllBooking()
     {
         try {
-            $this->db->query("SELECT * FROM ACCOMMODATION");
-            $Accommo = $this->db->ResultSet();
-            return $Accommo;
+            $this->db->query("SELECT * FROM BOOKING");
+            $Book = $this->db->ResultSet();
+            return $Book;
         } catch (PDOException $ex) {
             throw new PDOException($ex->getMessage(), (int)$ex->getCode());
         }
@@ -35,7 +39,7 @@ class Accommodation_
     public function delete($id)
     {
         try {
-            $this->db->query("DELETE FROM ACCOMMODATION WHERE ID=:ID");
+            $this->db->query("DELETE FROM BOOKING WHERE ID=:ID");
 
             $this->db->Bind(":ID", $id);
             if ($this->db->Excute()) {
@@ -49,11 +53,11 @@ class Accommodation_
         return false;
     }
 
-    //get accommodation by it's ID 
-    public function getAccommoByID($id)
+    //get booking by it's ID 
+    public function getBookingByID($id)
     {
         try {
-            $this->db->query("SELECT * FROM ACCOMMODATION WHERE ID=:ID");
+            $this->db->query("SELECT * FROM BOOKING WHERE ID=:ID");
             $this->db->Bind(":ID", $id);
             $Row = $this->db->Single();
 
@@ -62,13 +66,15 @@ class Accommodation_
             throw new PDOException($ex->getMessage(), $ex->getCode());
         }
     }
-    //update accommodation package
+    //update booking
     public function update($data)
     {
         try {
-            $this->db->query("UPDATE ACCOMMODATION SET ACCOMMODATIONPACKAGE_ID=:ACCOMMODATIONPACKAGE_ID,NAME=:NAME WHERE ID=:ID");
-            $this->db->Bind(":ACCOMMODATIONPACKAGE_ID", $data['AccommoPackage']);
-            $this->db->Bind(":NAME", $data['Name']);
+            $this->db->query("UPDATE BOOKING SET ACCOMMODATION_ID=:ACCOMMODATION_ID,FROMDATE=:FROMDATE,DURATION=:DURATION,STATUS=:STATUS WHERE ID=:ID");
+            $this->db->Bind(":ACCOMMODATION_ID", $data['Accommodation']);
+            $this->db->Bind(":FROMDATE", $data['Date']);
+            $this->db->Bind(":DURATION", $data['Duration']);
+            $this->db->Bind(":STATUS", $data['Status']);
             $this->db->Bind(":ID", $data['ID']);
             if ($this->db->Excute()) {
                 return true;
@@ -79,23 +85,12 @@ class Accommodation_
             throw new PDOException($ex->getMessage(), $ex->getCode());
         }
     }
-    //search for accommodation
+    //search for booking not donne yet
     public function search($search)
     {
         try {
-            $this->db->query("SELECT * FROM ACCOMMODATION WHERE UPPER(NAME) LIKE CONCAT('%',:NAME,'%')");
+            $this->db->query("SELECT * FROM BOOKING B INNER JOIN ACCOMMODATION A ON B.ACCOMMODATION_ID=A.ID WHERE UPPER(A.NAME) LIKE CONCAT('%',:NAME,'%')");
             $this->db->Bind(":NAME", $search);
-            $result = $this->db->ResultSet();
-            return $result;
-        } catch (PDOException $ex) {
-            throw new PDOException($ex->getMessage(), $ex->getCode());
-        }
-    }
-    public function getAccommodationsByPackage($id)
-    {
-        try {
-            $this->db->query("SELECT ID,NAME FROM ACCOMMODATION WHERE ACCOMMODATIONPACKAGE_ID=:ID");
-            $this->db->Bind(":ID", $id);
             $result = $this->db->ResultSet();
             return $result;
         } catch (PDOException $ex) {

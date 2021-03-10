@@ -107,11 +107,12 @@ class Users extends Controller
                 $data["ConfirmEmail"] = "Email addresses didn't match";
             }
             //Password validation
-            $passwordValidation = "/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/";
+            //$passwordValidation = "/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/";
+            $passwordValidation = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])$/";
             if (empty($data['Password'])) {
                 $data['PasswordError'] = "Please enter password";
             } elseif (preg_match($passwordValidation, $data["Password"])) {
-                $data['PasswordError'] = "Password must be have at least one numeric value";
+                $data['PasswordError'] = "Password must contain 8  characters or longer, at least 1 lowercase alphabetical character, at least 1 uppercase alphabetical character,at least 1 numeric character";
                 echo strlen($data['Password']);
             } elseif (strlen($data['Password']) < 8) {
                 $data['PasswordError'] = "Password must be at less 8 chatacters";
@@ -133,7 +134,8 @@ class Users extends Controller
                     $data['Password'] = password_hash($data['Password'], PASSWORD_DEFAULT);
                     //register 
                     if ($this->userModel->register($data)) {
-                        header('Location:' . URLROOT . '/User/Login.php');
+                        print("<script>registred successfully</script>");
+                        header('Location:' . URLROOT . '/Users/Login');
                     } else {
                         die("somthing went wrong");
                     }
