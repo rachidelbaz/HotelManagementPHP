@@ -50,7 +50,7 @@ class Booking extends Controller
                 $data['Errors'] = "Select an accommodation please";
             } else {
                 $status = 1;
-                if (!isset($_POST['Status'])) {
+                if (isset($_POST['Status'])) {
                     $status = trim($_POST['Status']);
                 }
                 $data = [
@@ -92,7 +92,7 @@ class Booking extends Controller
     {
         $booking = $this->bookingModel->getBookingByID($id);
         $data = [
-            'Accommo' => $booking->ACCOMMODATION_ID,
+            'Accommodation' => $booking->ACCOMMODATION_ID,
             'CIN' => $booking->CIN,
             'Date' => $booking->FROMDATE,
             'Duration' => $booking->DURATION,
@@ -102,21 +102,19 @@ class Booking extends Controller
         if ($_SERVER["REQUEST_METHOD"] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $status = 1;
-            if (!isset($_POST['Status'])) {
+            if (isset($_POST['Status'])) {
                 $status = trim($_POST['Status']);
             }
             $data = [
                 'ID' => $booking->ID,
-                'Accommo' => trim($_POST['Accommodation']),
+                'Accommodation' => trim($_POST['Accommodation']),
                 'CIN' => trim($_POST['CIN']),
                 'Date' => trim($_POST['Date']),
                 'Duration' => trim($_POST['Duration']),
                 'Status' => $status,
                 'Errors' => '',
             ];
-            if (empty($data['Accommo'])) {
-                $data['Errors'] = "Accommodation should be selected,it's required";
-            }
+
             if (empty($data['CIN'])) {
                 $data['Errors'] = "CIN couldn't be empty,it's required";
             }

@@ -2,11 +2,9 @@
 class Booking_
 {
     private $db;
-    private $status;
     public function __construct()
     {
         $this->db = new Database;
-        $this->status = new enum;
     }
     public function Add($data)
     {
@@ -15,7 +13,7 @@ class Booking_
         $this->db->Bind(":FROMDATE", $data['Date']);
         $this->db->Bind(":DURATION", $data['Duration']);
         $this->db->Bind(":CLIENT_ID", $data['CIN']);
-        $this->db->Bind(":STATUS", $this->status->PENDING); //add a booking with deafult value 1 : pending
+        $this->db->Bind(":STATUS", $data['Status']); //add a booking with deafult value 1 : pending
 
         if ($this->db->Excute()) {
             return true;
@@ -70,11 +68,17 @@ class Booking_
     public function update($data)
     {
         try {
-            $this->db->query("UPDATE BOOKING SET ACCOMMODATION_ID=:ACCOMMODATION_ID,FROMDATE=:FROMDATE,DURATION=:DURATION,STATUS=:STATUS WHERE ID=:ID");
-            $this->db->Bind(":ACCOMMODATION_ID", $data['Accommodation']);
+            $Q = "UPDATE BOOKING SET FROMDATE=:FROMDATE,DURATION=:DURATION,STATUS=:STATUS,CLIENT_ID=:CLIENT_ID WHERE ID=:ID";
+            $this->db->query($Q);
+            if (!empty($data['Accommodation'])) {
+                $Q = "UPDATE BOOKING SET ACCOMMODATION_ID=:ACCOMMODATION_ID,FROMDATE=:FROMDATE,DURATION=:DURATION,STATUS=:STATUS,CLIENT_ID=:CLIENT_ID WHERE ID=:ID";
+                $this->db->query($Q);
+                $this->db->Bind(":ACCOMMODATION_ID", $data['Accommodation']);
+            }
             $this->db->Bind(":FROMDATE", $data['Date']);
             $this->db->Bind(":DURATION", $data['Duration']);
             $this->db->Bind(":STATUS", $data['Status']);
+            $this->db->Bind(":CLIENT_ID", $data['CIN']);
             $this->db->Bind(":ID", $data['ID']);
             if ($this->db->Excute()) {
                 return true;
@@ -86,11 +90,13 @@ class Booking_
         }
     }
     //search for booking not donne yet
+    //serching with accommodation
     public function search($search)
     {
         try {
-            $this->db->query("SELECT * FROM BOOKING B INNER JOIN ACCOMMODATION A ON B.ACCOMMODATION_ID=A.ID WHERE UPPER(A.NAME) LIKE CONCAT('%',:NAME,'%')");
+            $this->db->query("SELECT * FROM BOOKING B INNER JOIN ACCOMMODATION A ON B.ACCOMMODATION_ID=A.ID WHERE UPPER(A.NAME) LIKE CONCAT('%',:NAME,'%') OR UPPER(CLIENT_ID)=:CLIENT_ID");
             $this->db->Bind(":NAME", $search);
+            $this->db->Bind(":CLIENT_ID", $search);
             $result = $this->db->ResultSet();
             return $result;
         } catch (PDOException $ex) {

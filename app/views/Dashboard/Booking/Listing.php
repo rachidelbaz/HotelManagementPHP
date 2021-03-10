@@ -4,9 +4,9 @@
         <table class="table table-dark table-striped" id="ListingTable">
             <thead>
                 <tr>
+                    <th scope="col">Client</th>
                     <th scope="col">Date</th>
                     <th scope="col">Duration</th>
-                    <th scope="col">Client</th>
                     <th scope="col">Accommodation</th>
                     <th scope="col">Status</th>
                     <th scope="col" style="width: 15%;">Actions</th>
@@ -15,11 +15,12 @@
             <tbody>
                 <?php foreach ($data['bookings'] as $value) : ?>
                     <tr>
-                        <td hidden><?php echo $value->ACCOMMODATIONPACKAGE_ID ?></td>
+                        <td hidden><?php echo $value->ACCOMMODATION_ID ?></td>
+                        <td><?php echo $value->CLIENT_ID ?></td>
                         <td><?php echo $value->FROMDATE ?></td>
                         <td><?php echo $value->DURATION ?></td>
                         <td hidden><?php echo $value->STATUS ?></td>
-                        <td><?php echo $value->CLIENT_ID ?></td>
+
                         <!--get acco name-->
                         <?php foreach ($data['accommo'] as $v) : ?>
                             <?php if ($value->ACCOMMODATION_ID == $v->ID) : ?>
@@ -29,9 +30,9 @@
                         <!--end-->
                         <!--btn Edit-->
                         <!--get acco status-->
-                        <?php foreach ($data['Status'] as $v) : ?>
-                            <?php if ($value->STATUS == $v) : ?>
-                                <td><?php echo $v->NAME ?></td>
+                        <?php foreach ($data['Status'] as $k => $v) : ?>
+                            <!--<td><?php echo ($k == $value->STATUS) ? $v : "-" ?>$k</td>--> <?php if ($value->STATUS == $k) : ?>
+                                <td><?php echo $v ?></td>
                             <?php endif ?>
                         <?php endforeach ?>
                         <!--end-->

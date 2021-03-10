@@ -8,24 +8,25 @@
     </button>
 </div>
 <div class="modal-body">
+    <div class="input-group mb-2">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Type <sapn class="text-danger"><strong>*</strong></span></span>
+        </div>
+        <select class="form-control" onchange="getPackage(this.value,'<?php echo URLROOT ?>/AccommodationPackage/getPackagesBytypeId/')">
+            <?php foreach ($data['accoTypes'] as $value) : ?>
+                <option value="<?php echo $value->ID ?>"><?php echo $value->NAME ?></option>
+            <?php endforeach ?>
+        </select>
+    </div>
+    <div class="input-group mb-2">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Package<sapn class="text-danger"><strong>*</strong></span></span>
+        </div>
+        <select class="form-control" onchange="getAcco(this.value,'<?php echo URLROOT ?>/Accommodation/getAccommodationsByPackageId/')" id="packageSelector">
+            <!--<option value="" selected disabled>--make your choice--</option>-->
+        </select>
+    </div>
     <form id="formAction" method="post">
-
-        <div class="input-group mb-2">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Type <sapn class="text-danger"><strong>*</strong></span></span>
-            </div>
-            <select class="form-control" onchange="getPackage(this.value,'<?php echo URLROOT ?>/AccommodationPackage/getPackagesBytypeId/')">
-                <?php foreach ($data['accoTypes'] as $value) : ?>
-                    <option value="<?php echo $value->ID ?>"><?php echo $value->NAME ?></option>
-                <?php endforeach ?>
-            </select>
-        </div>
-        <div class="input-group mb-2">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Package<sapn class="text-danger"><strong>*</strong></span></span>
-            </div>
-            <select class="form-control" onchange="getAcco(this.value,'<?php echo URLROOT ?>/Accommodation/getAccommodationsByPackageId/')" id="packageSelector"></select>
-        </div>
         <div class="input-group mb-2">
             <div class="input-group-prepend">
                 <span class="input-group-text">Accommodation<sapn class="text-danger"><strong>*</strong></span></span>
@@ -58,8 +59,8 @@
                 <span class="input-group-text">Status<sapn class="text-danger"><strong>*</strong></span></span>
             </div>
             <select class="form-control" name="Status">
-                <?php foreach ($data['Status'] as $s) : ?>
-                    <option value="<?php echo $s ?>"><?php echo $s ?></option>
+                <?php foreach ($data['Status'] as $k => $s) : ?>
+                    <option <?php echo ($k == 1) ? "selected" : ""; ?> value="<?php echo $k ?>"><?php echo $s ?></option>
                 <?php endforeach ?>
             </select>
         </div>
