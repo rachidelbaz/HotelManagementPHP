@@ -32,11 +32,11 @@
 				<!-- Main Nav -->
 				<nav class="main_nav">
 					<ul class="d-flex flex-row align-items-center justify-content-start">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="about.html">About us</a></li>
-						<li><a href="rooms.html">Rooms</a></li>
-						<li><a href="blog.html">News</a></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="<?php echo URLROOT ?>">Home</a></li>
+						<li><a href="#">About us</a></li>
+						<li><a href="#">Rooms</a></li>
+						<li><a href="#">News</a></li>
+						<li><a href="#">Contact</a></li>
 						<?php if (isLogedIn()) : ?>
 							<li><a href="<?php echo URLROOT ?>/Users/LogOut">LogOut</a></li>
 						<?php else : ?>

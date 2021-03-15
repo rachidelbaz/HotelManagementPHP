@@ -6,6 +6,7 @@ class Booking extends Controller
     private $accommoModel;
     private $accommoTypeModel;
     private $status;
+    private $search;
     public function __construct()
     {
         $this->bookingModel = $this->Model("Booking_");
@@ -19,12 +20,12 @@ class Booking extends Controller
         $accommo = $this->accommoModel->getAllAccomo();
         $accoTypes = $this->accommoTypeModel->getAllAccomoType();
         //SEARCH
-        $search = "";
+
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $search = filter_var(trim($_POST["search"]), FILTER_SANITIZE_STRING);
+            $this->search = filter_var(trim($_POST["search"]), FILTER_SANITIZE_STRING);
 
             if (!empty($search)) {
-                $bookings = $this->bookingModel->search(strtoupper($search));
+                $bookings = $this->bookingModel->search(strtoupper($this->search));
             }
         }
         //END SEARCH
@@ -35,7 +36,7 @@ class Booking extends Controller
             'Date' => '',
             'Duration' => '',
             'Errors' => '',
-            'search' => $search,
+            'search' => $this->search,
             'accommo' => $accommo,
             'accoTypes' => $accoTypes,
             'Status' => $this->status->getEnumValues()
@@ -46,44 +47,46 @@ class Booking extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $status = 1;
+            $data = [
+                'controller' => 'Booking',
+                'Accommodation' => '',
+                'CIN' => trim($_POST['CIN']),
+                'Date' => trim($_POST['Date']),
+                'Duration' => trim($_POST['Duration']),
+                'Status' => $status,
+                'Errors' => '',
+                'search' => $this->search
+            ];
             if (!isset($_POST['Accommodation'])) {
                 $data['Errors'] = "Select an accommodation please";
             } else {
-                $status = 1;
-                if (isset($_POST['Status'])) {
-                    $status = trim($_POST['Status']);
-                }
-                $data = [
-                    'Accommodation' => trim($_POST['Accommodation']),
-                    'CIN' => trim($_POST['CIN']),
-                    'Date' => trim($_POST['Date']),
-                    'Duration' => trim($_POST['Duration']),
-                    'Status' => $status,
-                    'Errors' => '',
-                ];
-
-                if (empty($data['Accommodation'])) {
-                    $data['Errors'] = "Accommodation is required";
-                }
-                if (empty($data['CIN'])) {
-                    $data['Errors'] = "CIN is required";
-                }
-                if (empty($data['Date'])) {
-                    $data['Errors'] = "Name is required";
-                }
-                if (empty($data['Duration'])) {
-                    $data['Errors'] = "Name is required";
-                }
+                $data['Accommodation'] = trim($_POST['Accommodation']);
+            }
+            if (isset($_POST['Status'])) {
+                $data['Status'] = trim($_POST['Status']);
+            }
+            if (empty($data['CIN'])) {
+                $data['Errors'] = "CIN is required";
+            }
+            if (strtotime($data['Date'])) {
+                $data['Errors'] = "Date is required";
+            }
+            if (empty($data['Duration'])) {
+                $data['Errors'] = "Name is required";
+            }
 
 
-                if (empty($data['Errors'])) {
-                    if ($this->bookingModel->Add($data)) {
-                        header('location:' . URLROOT . '/Booking/');
-                    } else {
-                        //die("something went wrong");
-                        $data["Errors"] = "somthing went wrong ,Please try one more time";
-                    }
+            if (empty($data['Errors'])) {
+                if ($this->bookingModel->Add($data)) {
+                    header('location:' . URLROOT . '/Booking/');
+                } else {
+                    //die("something went wrong");
+
+                    $data["Errors"] = "somthing went wrong ,Please try one more time";
                 }
+            } else {
+                header('location:' . URLROOT . '/Booking/');
             }
         }
         $this->View("Dashboard/Booking/Booking", $data);
@@ -122,7 +125,7 @@ class Booking extends Controller
                 $data['Errors'] = "Date couldn't be empty,it's required";
             }
             if (empty($data['Duration'])) {
-                $data['Errors'] = "Name couldn't be empty,it's required";
+                $data['Errors'] = "Duration couldn't be empty,it's required";
             }
 
 

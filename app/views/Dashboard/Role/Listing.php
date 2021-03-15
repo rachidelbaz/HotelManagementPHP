@@ -1,25 +1,31 @@
     <!--Table-->
     <!--check if acco types is null or empty-->
-    <?php if (!empty($data['accommo'])) : ?>
+    <?php if (!empty($data['Roles'])) : ?>
         <table class="table table-dark table-striped" id="ListingTable">
             <thead>
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Accommodation Package</th>
-                    <th scope="col" style="width: 16%;">Actions</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Privileges</th>
+                    <th scope="col" style="width: 15%;">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($data['accommo'] as $value) : ?>
+                <?php foreach ($data['Roles'] as $value) : ?>
                     <tr>
-                        <td hidden><?php echo $value->ACCOMMODATIONPACKAGE_ID ?></td>
-                        <td scope="row"><?php echo $value->NAME ?></td>
-                        <!--get acco package name-->
-                        <?php foreach ($data['accoPackages'] as $v) : ?>
-                            <?php if ($value->ACCOMMODATIONPACKAGE_ID == $v->ID) : ?>
-                                <td><?php echo $v->NAME ?></td>
-                            <?php endif ?>
-                        <?php endforeach ?>
+                        <td><?php echo $value->NAME ?></td>
+
+                        <!--get acco name-->
+                        <td>
+                            <ul>
+                                <?php foreach ($data['datPrivileges'] as $v) : ?>
+                                    <?php if ($v->ROLE_ID == $value->ID) : ?>
+                                        <li>
+                                            <?php echo $v->LEVEL ?>
+                                        </li>
+                                    <?php endif ?>
+                                <?php endforeach ?>
+                            </ul>
+                        </td>
                         <!--end-->
                         <!--btn Edit-->
                         <td>

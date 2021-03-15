@@ -76,11 +76,11 @@ class Accommodation extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
                 'ID' => $accommo->ID,
-                'Accommo' => trim($_POST['Accommo']),
+                'AccommoPackage' => trim($_POST['AccommoPackage']),
                 'Name' => trim($_POST['Name']),
                 'Errors' => '',
             ];
-            if (empty($data['Accommo'])) {
+            if (empty($data['AccommoPackage'])) {
                 $data['Errors'] = "Accommodation should be selected,it's required";
             }
             if (empty($data['Name'])) {
