@@ -2,6 +2,7 @@
 class Role extends Controller
 {
     private $roleModel;
+    private $search;
     public function __construct()
     {
         $this->roleModel = $this->Model('Role_');
@@ -13,12 +14,11 @@ class Role extends Controller
         $datPrivileges = $this->roleModel->getPrivileges();
         $roles = $this->roleModel->getAllRole();
         //SEARCH
-        $search = "";
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $search = filter_var(trim($_POST["search"]), FILTER_SANITIZE_STRING);
+            $this->search = filter_var(trim($_POST["search"]), FILTER_SANITIZE_STRING);
 
-            if (!empty($search)) {
-                $roles = $this->roleModel->search(strtoupper($search));
+            if (!empty($this->search)) {
+                $roles = $this->roleModel->search(strtoupper($this->search));
             }
         }
         //END SEARCH
@@ -26,7 +26,7 @@ class Role extends Controller
             'controller' => 'Role',
             'Role' => '',
             'Errors' => '',
-            'search' => $search,
+            'search' => $this->search,
             'Roles' => $roles,
             'Privileges' => $Privileges,
             'datPrivileges' => $datPrivileges
@@ -47,6 +47,8 @@ class Role extends Controller
             ];
             if (!isset($_POST['Privileges'])) {
                 $data['Errors'] = "One of Privileges should be selected";
+            } else {
+                $data['Privileges'] = $_POST['Privileges'];
             }
             if (empty($data['Role'])) {
                 $data['Errors'] = "Role is required";
@@ -62,7 +64,43 @@ class Role extends Controller
         }
         header('location:' . URLROOT . '/Role');
     }
+    public function Edit($id)
+    {
+        $role = $this->roleModel->getRoleByID($id);
+        $data = [
+            'ID' => $role->ID,
+            'Role' => $role->NAME,
+            'Privileges' => [],
+            'Errors' => '',
+        ];
+        if ($_SERVER["REQUEST_METHOD"] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+            if (isset($_POST['Privileges'])) {
+                $data['Privileges'] = $_POST['Privileges'];
+            }
+
+            $data = [
+                'ID' => $role->ID,
+                'Role' => $_POST['Role'],
+                'Privileges' => $_POST['Privileges'],
+                'Errors' => ''
+            ];
+
+            if (empty($data['Role'])) {
+                $data['Errors'] = "Role couldn't be empty,it's required";
+            }
+
+            if (empty($data['Errors'])) {
+                if ($this->roleModel->update($data)) {
+                    $data['Message'] = "Updated successfully";
+                    header("Location:" . URLROOT . "/Role");
+                }
+            }
+        }
+        header('location:' . URLROOT . '/Role');
+        //$this->View("Dashboard/Role/Role", $data);
+    }
 
     public function Delete($id)
     {

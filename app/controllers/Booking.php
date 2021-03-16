@@ -24,7 +24,7 @@ class Booking extends Controller
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->search = filter_var(trim($_POST["search"]), FILTER_SANITIZE_STRING);
 
-            if (!empty($search)) {
+            if (!empty($this->search)) {
                 $bookings = $this->bookingModel->search(strtoupper($this->search));
             }
         }

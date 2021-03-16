@@ -18,7 +18,7 @@
     <div class="col col-9">
         <div class="input-group mb-2">
             <form id="searchForm" class="col " action="<?php echo URLROOT . "/{$data['controller']}" ?>" method="POST">
-                <input type="text" class="form-control" name="search" value="<?php echo $data['search'] ?>" placeholder="Search!" aria-describedby="button-addon4">
+                <input type="text" class="form-control" name="search" value="<?php echo $data['search'] ?>" placeholder="Search! by role or privilege" aria-describedby="button-addon4">
             </form>
             <div class="input-group-append" id="button-addon4">
                 <a class="btn btn-outline-primary" type="button" href="javascript:document.getElementById('searchForm').submit()"><i class="fas fa-search fa-1x mr-1"></i>Search</a>

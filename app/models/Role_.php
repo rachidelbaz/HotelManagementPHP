@@ -6,19 +6,34 @@ class Role_
     {
         $this->db = new Database;
     }
+    private function deletePrivileges($data)
+    {
+        $this->db->query('DELETE FROM PRIVILEGE WHERE ROLE_ID=:ROLE_ID');
+        $this->db->Bind(":ROLE_ID", $data['ID']);
+        if ($this->db->Excute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    private function createPrivileges($data)
+    {
+        $this->db->query('SELECT MAX(ID) AS ID FROM ROLE');
+        $Role = $this->db->Single();
+        for ($i = 0; $i < count($data['Privileges']); $i++) {
+            $this->db->query("INSERT INTO PRIVILEGE(LEVEL,ROLE_ID) VALUES(:LEVEL,:ROLE_ID)");
+            $this->db->Bind(":LEVEL", $data['Privileges'][$i]);
+            $this->db->Bind(":ROLE_ID", $Role->ID);
+            $this->db->Excute();
+        }
+        return true;
+    }
     public function Add($data)
     {
         $this->db->query('INSERT INTO ROLE(NAME) VALUES(:NAME)');
         $this->db->Bind(":NAME", $data['Role']);
         if ($this->db->Excute()) {
-            $this->db->query('SELECT MAX(ID) AS ID FROM ROLE');
-            $Role = $this->db->Single();
-            for ($i = 0; $i < count($data['Privileges']); $i++) {
-                $this->db->query("INSERT INTO PRIVILEGE(LEVEL,ROLE_ID) VALUES(:LEVEL,:ROLE_ID)");
-                $this->db->Bind(":LEVEL", $data['Privileges'][$i]);
-                $this->db->Bind(":ROLE_ID", $Role->ID);
-                $this->db->Excute();
-            }
+            $this->createPrivileges($data);
             return true;
         } else {
             return false;
@@ -53,13 +68,26 @@ class Role_
         }
         return false;
     }
-
+    //Edit
+    public function update($data)
+    {
+        $this->db->query('UPDATE ROLE SET NAME=:NAME WHERE ID=:ID');
+        $this->db->Bind(":NAME", $data['Role']);
+        $this->db->Bind(":ID", $data['ID']);
+        if ($this->db->Excute()) {
+            $this->deletePrivileges($data);
+            $this->createPrivileges($data);
+            return true;
+        } else {
+            return false;
+        }
+    }
     //search  not donne yet
     //serching with 
     public function search($search)
     {
         try {
-            $this->db->query("SELECT ID,NAME,LEVEL,ROLE_ID FROM ROLE R INNER JOIN PRIVILEGE P ON R.ID=P.ROLE_ID WHERE UPPER(R.NAME) LIKE CONCAT('%',:NAME,'%') OR UPPER(LEVEL)=:LEVEL");
+            $this->db->query("SELECT R.ID,NAME,LEVEL,ROLE_ID FROM ROLE R INNER JOIN PRIVILEGE P ON R.ID=P.ROLE_ID WHERE UPPER(R.NAME) LIKE CONCAT('%',:NAME,'%') OR UPPER(LEVEL)=:LEVEL");
             $this->db->Bind(":NAME", $search);
             $this->db->Bind(":LEVEL", $search);
             $result = $this->db->ResultSet();
@@ -84,8 +112,19 @@ class Role_
     {
         try {
             $this->db->query("SELECT * FROM PRIVILEGE");
-            $Book = $this->db->ResultSet();
-            return $Book;
+            $privileges = $this->db->ResultSet();
+            return $privileges;
+        } catch (PDOException $ex) {
+            throw new PDOException($ex->getMessage(), (int)$ex->getCode());
+        }
+    }
+    public function getRoleByID($id)
+    {
+        try {
+            $this->db->query("SELECT * FROM ROLE WHERE ID=:ID");
+            $this->db->Bind(":ID", $id);
+            $role = $this->db->Single();
+            return $role;
         } catch (PDOException $ex) {
             throw new PDOException($ex->getMessage(), (int)$ex->getCode());
         }
