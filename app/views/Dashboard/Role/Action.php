@@ -31,5 +31,3 @@
 </div>
 </form>
 </div>
-<script src="<?php echo URLROOT ?>//public/dashboard/scripts/booking.js">
-</script>
