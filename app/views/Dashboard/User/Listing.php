@@ -6,9 +6,9 @@
                 <tr>
                     <th scope="col">CIN</th>
                     <th scope="col">Full name</th>
-                    <th scope="col">Email</th>
                     <th scope="col">Phone number</th>
-                    <th scope="col" style="width: 15%;">Actions</th>
+                    <th scope="col">Email</th>
+                    <th scope="col" style="width: 16%;">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,8 +16,8 @@
                     <tr>
                         <td><?php echo $value->CIN ?></td>
                         <td><?php echo $value->Fullname ?></td>
-                        <td><?php echo $value->Email ?></td>
                         <td><?php echo $value->NumberPhone ?></td>
+                        <td><?php echo $value->Email ?></td>
                         <td>
                             <button onclick="bindHref(this,document.getElementById('formAction'))" class="btn btn-outline-primary mr-2" data-toggle="modal" data-target="#exampleModalCenter" data-href="<?php echo URLROOT . "/{$data['controller']}" ?>/Edit/<?php echo $value->CIN ?>">
                                 <i class="fas fa-edit fa-1x mr-1"></i>Edit</button>

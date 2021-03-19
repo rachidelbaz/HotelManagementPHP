@@ -23,6 +23,12 @@
         </div>
         <div class="input-group mb-2">
             <div class="input-group-prepend">
+                <span class="input-group-text">Phone number<sapn class="text-danger"><strong>*</strong></span></span>
+            </div>
+            <input class="form-control" name="Phonenumber" type="phone" value="">
+        </div>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
                 <span class="input-group-text">Email<sapn class="text-danger"><strong>*</strong></span></span>
             </div>
             <input class="form-control" name="Email" type="email" value="">
@@ -33,12 +39,7 @@
             </div>
             <input class="form-control" name="ConfirmEmail" type="email" value="">
         </div>
-        <div class="input-group mb-2">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Phone number<sapn class="text-danger"><strong>*</strong></span></span>
-            </div>
-            <input class="form-control" name="Phonenumber" type="phone" value="">
-        </div>
+
         <span class="text-danger"><?php echo $data['Errors'] ?></span>
 </div>
 <div class="modal-footer">

@@ -112,7 +112,7 @@ class Users extends Controller
             if (empty($data['Password'])) {
                 $data['PasswordError'] = "Please enter password";
             } elseif (preg_match($passwordValidation, $data["Password"])) {
-                $data['PasswordError'] = "Password must contain 8  characters or longer, at least 1 lowercase alphabetical character, at least 1 uppercase alphabetical character,at least 1 numeric character";
+                $data['PasswordError'] = "Password must contain 8 characters or longer, at least 1 lowercase alphabetical character, at least 1 uppercase alphabetical character,at least 1 numeric character";
                 echo strlen($data['Password']);
             } elseif (strlen($data['Password']) < 8) {
                 $data['PasswordError'] = "Password must be at less 8 chatacters";

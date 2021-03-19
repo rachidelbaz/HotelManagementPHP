@@ -20,11 +20,12 @@
         //get current row
           let tr=e.parentElement.parentElement;
           let tdData=[];
-          for(let i=0;i<tr.children.length-2;i++){
+          for(let i=0;i<tr.children.length-1;i++){
              tdData.push(tr.children[i].textContent);
           }
+    console.log(tdData);
           //send data to the form 
-          for(let i=0;i<tr.children.length-2;i++){
+          for(let i=0;i<tr.children.length-1;i++){
             el.children[i].lastElementChild.value=tdData[i];
           }
       }

@@ -6,19 +6,37 @@ class User_
     {
         $this->db = new Database;
     }
+    private function randomPassword()
+    {
+        $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+        $pass = password_hash(substr(str_shuffle($alphabet), 0, 8), PASSWORD_DEFAULT);
+        echo $pass;
+        return $pass;
+    }
     public function Add($data)
     {
-        $this->db->query('INSERT INTO USER(CIN,FULLNAME,EMAIL,PHONENUMBER) VALUES(:CIN,:FULLNAME:EMAIL,:PHONENUMBER)');
-        $this->db->Bind(":CIN", $data['CIN']);
-        $this->db->Bind(":FULLNAME", $data['Fullname']);
-        $this->db->Bind(":EMAIL", $data['Email']);
-        $this->db->Bind(":PHONENUMBER", $data['PhoneNumber']);
+        //Prepar query
+        $this->db->Query("INSERT INTO USER(CIN,FULLNAME,EMAIL,NUMBERPHONE,PASSWORD) VALUES(:CIN,:FULLNAME,:EMAIL,:NUMBERPHONE,:PASSWORD)");
+        //bind values 
+        $this->db->Bind(":CIN", $data["CIN"]);
+        $this->db->Bind(":FULLNAME", $data["Fullname"]);
+        $this->db->Bind(":EMAIL", $data["Email"]);
+        $this->db->Bind(":NUMBERPHONE", $data["Phonenumber"]);
+        $this->db->Bind(":PASSWORD", $this->randomPassword());
         if ($this->db->Excute()) {
             return true;
         } else {
             return false;
         }
     }
+    /*public function Add($data)
+    {
+        try {
+            $this->Register($data);
+        } catch (PDOException $ex) {
+            throw new PDOException($ex->getMessage(), (int)$ex->getCode());
+        }
+    }*/
     //listing 
     public function getAllClients()
     {
@@ -52,8 +70,10 @@ class User_
     public function update($data)
     {
         $this->db->query('UPDATE USER SET CIN=:CIN,FULLNAME=:FULLNAME,EMAIL=:EMAIL,NUMBERPHONE=:NUMBERPHONE WHERE CIN=:CIN');
-        $this->db->Bind(":FULLNAME", $data['Fullname']);
-        $this->db->Bind(":CIN", $data['CIN']);
+        $this->db->Bind(":CIN", $data["CIN"]);
+        $this->db->Bind(":FULLNAME", $data["Fullname"]);
+        $this->db->Bind(":EMAIL", $data["Email"]);
+        $this->db->Bind(":NUMBERPHONE", $data["Phonenumber"]);
         if ($this->db->Excute()) {
             return true;
         } else {
@@ -82,6 +102,34 @@ class User_
             $this->db->Bind(":CIN", $id);
             $user = $this->db->Single();
             return $user;
+        } catch (PDOException $ex) {
+            throw new PDOException($ex->getMessage(), (int)$ex->getCode());
+        }
+    }
+    public function getUserByCIN($id)
+    {
+        try {
+            $this->db->query("SELECT * FROM USER WHERE CIN=:CIN");
+            $this->db->Bind(":CIN", $id);
+            if ($this->db->Count() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $ex) {
+            throw new PDOException($ex->getMessage(), (int)$ex->getCode());
+        }
+    }
+    public function getUserByEmail($email)
+    {
+        try {
+            $this->db->query("SELECT * FROM USER WHERE EMAIL=:EMAIL");
+            $this->db->Bind(":EMAIL", $email);
+            if ($this->db->Count() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (PDOException $ex) {
             throw new PDOException($ex->getMessage(), (int)$ex->getCode());
         }
